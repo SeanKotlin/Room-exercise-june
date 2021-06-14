@@ -1,7 +1,8 @@
-package com.sklinn.roomexercisejune
+package com.sklinn.roomexercisejune.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.sklinn.roomexercisejune.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
