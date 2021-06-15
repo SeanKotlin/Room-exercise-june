@@ -1,9 +1,7 @@
 package com.sklinn.roomexercisejune.viewModel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sklinn.roomexercisejune.data.User
 import com.sklinn.roomexercisejune.data.UserDatabase
 import com.sklinn.roomexercisejune.repository.UserRepository
@@ -13,9 +11,8 @@ import kotlinx.coroutines.launch
 class UserViewModel(
     application: Application
 ) : AndroidViewModel(application) {
-
+    val readAllData: LiveData<List<User>>
     private val userRepository: UserRepository
-    private val readAllData: LiveData<List<User>>
 
     init {
         val userDao = UserDatabase.getDatabase(application).userDao()
@@ -24,6 +21,8 @@ class UserViewModel(
     }
 
     fun addUser(user: User) {
-        viewModelScope.launch(Dispatchers.IO) { userRepository.addUser(user) }
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.addUser(user)
+        }
     }
 }
