@@ -25,4 +25,12 @@ class UserViewModel(
             userRepository.addUser(user)
         }
     }
+
+    fun updateUSer(user: User){
+        viewModelScope.launch(Dispatchers.IO) { userRepository.updateUser(user) }
+    }
+
+    fun deleteUser(user: User){
+        viewModelScope.launch(Dispatchers.IO) { userRepository.deleteUser(user) }
+    }
 }

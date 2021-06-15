@@ -3,9 +3,11 @@ package com.sklinn.roomexercisejune.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sklinn.roomexercisejune.R
 import com.sklinn.roomexercisejune.data.User
+import com.sklinn.roomexercisejune.fragment.list.ListFragmentDirections
 import kotlinx.android.synthetic.main.custom_rows.view.*
 
 class Adapter(
@@ -25,6 +27,11 @@ class Adapter(
         holder.itemView.tv_age.text = currentItem.age.toString()
         holder.itemView.tv_FirstName.text = currentItem.firstName
         holder.itemView.tv_lastName.text = currentItem.lastName
+
+        holder.itemView.currentItem.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToUpdateFragment2(currentItem)
+            holder.itemView.findNavController().navigate(action)
+        }
 
     }
 

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_updateFragment2"
+            app:destination="@id/updateFragment2" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -24,8 +27,15 @@
             app:destination="@id/listFragment" />
     </fragment>
     <fragment
-        android:id="@+id/updateFragment"
-        android:name="com.sklinn.roomexercisejune.UpdateFragment"
+        android:id="@+id/updateFragment2"
+        android:name="com.sklinn.roomexercisejune.fragment.update.UpdateFragment"
         android:label="fragment_update"
-        tools:layout="@layout/fragment_update" />
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment2_to_listFragment"
+            app:destination="@id/listFragment" />
+        <argument
+            android:name="currentUser"
+            app:argType="com.sklinn.roomexercisejune.data.User" />
+    </fragment>
 </navigation>
