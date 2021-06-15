@@ -1,8 +1,13 @@
 package com.sklinn.roomexercisejune.fragment.list
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -44,5 +49,31 @@ class ListFragment : Fragment(R.layout.fragment_list) {
             adapter.setNewData(users)
         })
 
+        setHasOptionsMenu(true)
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_item, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId ==R.id.delete_menu){
+            deleteAllUser()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteAllUser(){
+        AlertDialog.Builder(requireContext())
+            .setNegativeButton("No"){_,_ -> }
+            .setPositiveButton("Yes"){_,_ ->
+                mViewModel.deleteAllUsers()
+                Toast.makeText(requireContext(), "Successfully delete everything", Toast.LENGTH_LONG).show()
+            }
+            .setMessage("Are you sure to clean everything")
+            .setTitle("DELETE EVERYTHING")
+            .create().show()
     }
 }

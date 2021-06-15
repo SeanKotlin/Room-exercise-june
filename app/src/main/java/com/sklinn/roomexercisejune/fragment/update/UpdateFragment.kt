@@ -1,12 +1,11 @@
 package com.sklinn.roomexercisejune.fragment.update
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -43,6 +42,36 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
         btn_updateUser.setOnClickListener {
             updateUser()
         }
+
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_item, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.delete_menu){
+            deleteUser()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteUser() {
+        val currentUserName = args.currentUser.firstName
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes"){_,_ ->
+            mViewModel.deleteUser(args.currentUser)
+            Toast.makeText(requireContext(), "Successfully deleted ${currentUserName}", Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_updateFragment2_to_listFragment)
+        }
+        builder.setNegativeButton("No"){_,_ ->
+            Toast.makeText(requireContext(), "Cancel deleting", Toast.LENGTH_LONG).show()
+        }
+            builder.setMessage("Are you sure to delete ${currentUserName}")
+        builder.setTitle("Delete")
+            builder.create().show()
     }
 
     private fun updateUser() {

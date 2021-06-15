@@ -19,4 +19,8 @@ class UserRepository(
     suspend fun deleteUser(user: User){
         userDao.deleteUser(user)
     }
+
+    suspend fun deleteAllUsers(){
+        userDao.deleteAllUsers()
+    }
 }

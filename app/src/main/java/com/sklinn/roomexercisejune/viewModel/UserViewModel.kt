@@ -1,7 +1,9 @@
 package com.sklinn.roomexercisejune.viewModel
 
 import android.app.Application
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.viewModelScope
 import com.sklinn.roomexercisejune.data.User
 import com.sklinn.roomexercisejune.data.UserDatabase
 import com.sklinn.roomexercisejune.repository.UserRepository
@@ -26,11 +28,15 @@ class UserViewModel(
         }
     }
 
-    fun updateUSer(user: User){
+    fun updateUSer(user: User) {
         viewModelScope.launch(Dispatchers.IO) { userRepository.updateUser(user) }
     }
 
-    fun deleteUser(user: User){
+    fun deleteUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) { userRepository.deleteUser(user) }
+    }
+
+    fun deleteAllUsers() {
+        viewModelScope.launch(Dispatchers.IO) { userRepository.deleteAllUsers() }
     }
 }
